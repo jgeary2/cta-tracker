@@ -1,0 +1,14 @@
+query GetArrivals($runNumber: Int, $mapId: Int) {
+    getArrivals(runNumber: $runNumber, mapId: $mapId) {
+        stationId
+        stationName
+        serviceDir
+        destination
+        rn
+        line
+        arrivalTime
+        isDue
+        isScheduled
+        isDelayed
+    }
+}

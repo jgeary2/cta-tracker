@@ -1,0 +1,93 @@
+.App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.refresh-container {
+  width: 70px;
+  height: 70px;
+  background: rgb(237, 234, 234);
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.15);
+  padding-top: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.train-select {
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  text-transform: capitalize;
+
+  .dropdown-toggle {
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  .dropdown-item {
+    font-weight: bold;
+
+    &.active {
+      background-color: #c1bfbf;
+    }
+  }
+}
+
+.arrivals-drawer {
+  &.offcanvas {
+    background-color: #e8dfdf;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .arrivals-header {
+    color: black;
+    font-size: xx-large;
+    font-weight: bold;
+    text-transform: capitalize;
+    border-top-left-radius: 10px;
+
+    &.btn-close {
+      font-size: small;
+    }
+  }
+
+  .arrivals-train-run {
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+    padding: 0 0 8px 16px;
+    margin-top: -16px;
+  }
+
+  .arrivals-list {
+    overflow-y: auto;
+  }
+
+  .arrivals-item {
+    cursor: pointer;
+    font-size: large;
+    font-weight: bold;
+    height: 60px;
+    align-content: center;
+    color: ghostwhite !important;
+
+    .run-number {
+      font-size: small;
+    }
+  }
+}
+
+.float-right {
+  float: right;
+}
+
+@import '~bootstrap/scss/bootstrap.scss';

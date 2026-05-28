@@ -1,0 +1,10 @@
+query GetTrains($line: String) {
+    getTrains(line: $line) {
+        lat
+        lon
+        rn
+        nextStaNm
+        heading
+        line
+    }
+}

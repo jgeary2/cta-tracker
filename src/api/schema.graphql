@@ -1,0 +1,30 @@
+type Train {
+    rn: Int
+    lat: Float
+    lon: Float
+    nextStaNm: String
+    heading: Int
+    line: String
+}
+
+type Arrival {
+    stationId: Int
+    stationName: String
+    serviceDir: String
+    destination: String
+    rn: Int
+    line: String
+    arrivalTime: Int
+    isDue: Boolean
+    isScheduled: Boolean
+    isDelayed: Boolean
+}
+
+
+type Query {
+    getTrains(line: String): [Train]
+}
+
+type Query {
+    getArrivals(runNumber: Int, mapId: Int): [Arrival]
+}

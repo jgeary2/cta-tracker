@@ -1,0 +1,4 @@
+npm test -- --watchAll=false || {
+    echo "ERROR: Unit test failure."
+    exit 1
+}

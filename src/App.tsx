@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Trains} from "./client/components/Trains";
+import {APIProvider, Map} from "@vis.gl/react-google-maps";
+import './client/styles/appStyles.scss';
+// import {TransitLayer} from "./client/components/TransitLayer";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string}>
+        <Map
+          defaultZoom={12}
+          defaultCenter={{lat: 41.8781, lng: -87.7298}}
+          mapId='cta-tracker'
         >
-          Learn React
-        </a>
-      </header>
+          {/*<TransitLayer/>*/}
+          <Trains/>
+        </Map>
+      </APIProvider>
     </div>
   );
 }
