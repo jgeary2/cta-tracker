@@ -2,7 +2,6 @@ import React from 'react';
 import {Trains} from "./client/components/Trains";
 import {APIProvider, Map} from "@vis.gl/react-google-maps";
 import './client/styles/appStyles.scss';
-// import {TransitLayer} from "./client/components/TransitLayer";
 
 function App() {
   return (
@@ -11,9 +10,8 @@ function App() {
         <Map
           defaultZoom={12}
           defaultCenter={{lat: 41.8781, lng: -87.7298}}
-          mapId='cta-tracker'
+          mapId='71791896894ee6601a3296ac'
         >
-          {/*<TransitLayer/>*/}
           <Trains/>
         </Map>
       </APIProvider>

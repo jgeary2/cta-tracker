@@ -1,9 +1,8 @@
 import {AdvancedMarker, useAdvancedMarkerRef, useMap} from "@vis.gl/react-google-maps";
-import CircleIcon from '@mui/icons-material/Circle';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import DirectionsTransitFilledTwoToneIcon from '@mui/icons-material/DirectionsTransitFilledTwoTone';
-import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
+import CircleTwoToneIcon from '@mui/icons-material/CircleTwoTone';
 import React, {useEffect, useMemo, useState} from "react";
 import {Dropdown, DropdownButton} from "react-bootstrap";
 import {COLOR_MAPPING, TRAIN_LINES} from "../model/constants";
@@ -11,7 +10,11 @@ import {Station, Train} from "../model/types";
 import {useGetTrains} from "../hooks/useGetTrains/useGetTrains";
 import {ArrivalTimes} from "./ArrivalTimes";
 import stationsJson from "../../data/stations.json";
-import {getStationBackgroundIconSize, getStationIconSize, getTrainIconSize} from "../utils/utils";
+import {
+  getStationIconSize,
+  getTrainIconSize
+} from "../utils/utils";
+import {TrainLines} from "./TrainLines";
 
 export const Trains = () => {
 
@@ -158,74 +161,62 @@ export const Trains = () => {
 
   return (
     <React.Fragment>
+      <TrainLines selectedLine={selectedLine}/>
       {trains.length > 0 ?
         trains.map(({heading, lat, lon, rn, line}: Train) => (
           <React.Fragment>
             <AdvancedMarker
-              anchorTop="-50%"
-              clickable={false}
-              position={{lat, lng: lon}}
-              ref={markerRef}
-            >
-              <CircleIcon
-                style={{
-                  cursor: "pointer",
-                  fill: "white",
-                  fontSize: getTrainIconSize(rn, selectedTrain, selectedStation)
-                }}
-              />
-            </AdvancedMarker>
-            <AdvancedMarker
-              anchorTop="-50%"
+              anchorTop="-100%"
               clickable={true}
               onClick={() => handleTrainSelect(rn, line)}
               position={{lat, lng: lon}}
               ref={markerRef}
             >
-              <ArrowCircleRightOutlinedIcon
+              <DirectionsTransitFilledTwoToneIcon
                 style={{
                   cursor: "pointer",
                   fill: COLOR_MAPPING[line],
                   fontSize: getTrainIconSize(rn, selectedTrain, selectedStation)
                 }}
-                sx={{transform: `rotate(${heading - 90}deg)`}}
               />
             </AdvancedMarker>
+            {selectedTrain === rn ? (
+              <AdvancedMarker
+                anchorTop="-250%"
+                clickable={true}
+                position={{lat, lng: lon}}
+                ref={markerRef}>
+                <ArrowCircleRightOutlinedIcon
+                  style={{
+                    cursor: "pointer",
+                    fill: COLOR_MAPPING[line],
+                    fontSize: 40
+                  }}
+                  sx={{transform: `rotate(${heading - 90}deg)`}}
+                />
+              </AdvancedMarker>
+            ) : null}
           </React.Fragment>
         )) : null}
       {stations.map(({mapId, lat, lon}: Station) => (
-          <React.Fragment>
-            <AdvancedMarker
-              anchorTop="-117%"
-              clickable={false}
-              position={{lat, lng: lon}}
-              ref={markerRef}
-            >
-              <SquareRoundedIcon
-                style={{
-                  cursor: "pointer",
-                  fill: "lightgrey",
-                  fontSize: getStationBackgroundIconSize(mapId, selectedStation)
-                }}
-              />
-            </AdvancedMarker>
-            <AdvancedMarker
-              clickable={false}
-              position={{lat, lng: lon}}
-              ref={markerRef}
-            >
-              <DirectionsTransitFilledTwoToneIcon
-                onClick={() => handleStationSelect(mapId)}
-                style={{
-                  cursor: "pointer",
-                  fill: "slategrey",
-                  fontSize: getStationIconSize(mapId, selectedStation)
-                }}
-              />
-            </AdvancedMarker>
-          </React.Fragment>
-
-        ))}
+        <React.Fragment>
+          <AdvancedMarker
+            anchorTop={"-50%"}
+            clickable={false}
+            position={{lat, lng: lon}}
+            ref={markerRef}
+          >
+            <CircleTwoToneIcon
+              onClick={() => handleStationSelect(mapId)}
+              style={{
+                cursor: "pointer",
+                fill: "slategrey",
+                fontSize: getStationIconSize(mapId, selectedStation)
+              }}
+            />
+          </AdvancedMarker>
+        </React.Fragment>
+      ))}
       <div className="refresh-container">
         <RefreshOutlinedIcon onClick={handleRefresh} style={{fontSize: "60"}}/>
       </div>

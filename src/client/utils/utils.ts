@@ -6,6 +6,3 @@ export const getTrainIconSize = (run: number | null, selectedTrain: number | nul
 
 export const getStationIconSize = (station: number, selectedStation: number | null): number =>
   station === selectedStation ? 60 : 30;
-
-export const getStationBackgroundIconSize = (station: number, selectedStation: number | null): number =>
-  station === selectedStation ? 50 : 20;
